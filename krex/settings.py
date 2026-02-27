@@ -18,9 +18,9 @@ load_dotenv()
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-dev-key")
 
-DEBUG = True  # ⚠️ Change to False in production
+DEBUG = False  # ⚠️ Change to False in production
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.onrender.com']
 
 # ==========================================================
 # APPLICATIONS
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'krex.urls'
@@ -128,3 +129,9 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 LOGIN_URL = 'select_role'
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'select_role'
+
+import os
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
