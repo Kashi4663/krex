@@ -1,0 +1,27 @@
+{% extends "admin_panel/base_admin.html" %}
+
+{% block content %}
+
+<h1>TV Shows</h1>
+
+<a href="{% url 'add_show' %}" class="btn">+ Add Show</a>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Language</th>
+        <th>Trending</th>
+    </tr>
+
+    {% for show in shows %}
+    <tr>
+        <td>{{ show.title }}</td>
+        <td>{{ show.release_year }}</td>
+        <td>{{ show.language }}</td>
+        <td>{{ show.is_trending }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ episode.title }} - KREX</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .player-wrapper {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: black;
+        }
+
+        /* ================= OVERLAY ================= */
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: 0 0 220px 120px;
+            background: linear-gradient(
+                to top,
+                rgba(0,0,0,0.85) 0%,
+                rgba(0,0,0,0.6) 30%,
+                transparent 70%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .overlay.active {
+            opacity: 1;
+        }
+
+        .info-box {
+            max-width: 700px;
+        }
+
+        .brand {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .watching-text {
+            font-size: 16px;
+            color: #bbb;
+            margin-bottom: 10px;
+        }
+
+        .show-title {
+            font-size: 55px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .episode-meta {
+            font-size: 18px;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .episode-description {
+            font-size: 18px;
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        /* ================= BACK BUTTON ================= */
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 20;
+            transition: 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        
+
+    </style>
+</head>
+
+<body>
+
+<div class="player-wrapper">
+
+    {% if episode.video %}
+    <video id="videoPlayer" controls autoplay playsinline>
+        <source src="{{ episode.video.url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    {% else %}
+        <h2 style="text-align:center; padding-top:200px;">
+            No episode video available
+        </h2>
+    {% endif %}
+
+    <!-- ================= INFO OVERLAY ================= -->
+
+    <div class="overlay" id="overlay">
+        <div class="info-box">
+            <div class="brand">KREX</div>
+
+            <div class="watching-text">You're Watching</div>
+
+            <div class="show-title">
+                {{ show.title }}
+            </div>
+
+            <div class="episode-meta">
+                S{{ episode.season|stringformat:"02d" }}E{{ episode.episode_number|stringformat:"02d" }}
+                — {{ episode.title }}
+            </div>
+
+            <div class="episode-description">
+                {{ episode.description }}
+            </div>
+        </div>
+    </div>
+
+    <!-- BACK BUTTON -->
+    <button class="back-btn" onclick="history.back()">← Back</button>
+
+</div>
+
+<script>
+const video = document.getElementById("videoPlayer");
+const overlay = document.getElementById("overlay");
+
+/* Show overlay when paused */
+video.addEventListener("pause", () => {
+    overlay.classList.add("active");
+});
+
+/* Hide overlay when playing */
+video.addEventListener("play", () => {
+    overlay.classList.remove("active");
+});
+</script>
+
+</body>
+</html>

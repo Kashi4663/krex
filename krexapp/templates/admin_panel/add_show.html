@@ -1,0 +1,13 @@
+{% extends "admin_panel/base_admin.html" %}
+
+{% block content %}
+
+<h1>Add TV Show</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Save Show</button>
+</form>
+
+{% endblock %}

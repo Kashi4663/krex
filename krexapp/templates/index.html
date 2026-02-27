@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- first template -->
+<div class="video-bg">
+    <video autoplay muted loop playsinline>
+        <source src="{% static 'images/loop4.mp4' %}" type="video/mp4">
+    </video>
+</div>
+
+<!-- second temlate-->
+<div class="bricks">
+    <img src="{% static 'images/sample3.png' %}" alt="Overlay Image">
+</div>
+
+<button class="custom-btn" id="eliteBtn">Join Krex Elite at ₹499/year</button>
+
+<button class="custom-btn1" id="plusBtn">Join Krex Plus at ₹299/year</button>
+
+<button class="custom-btn2" id="basicBtn">Join Krex at ₹99/year</button>
+
+<button class="custom-btn3" id="compareBtn">Compare All Plans</button>
+
+<button class="custom-btn4" id="joinBtn">Join KREX</button>
+
+
+
+<div class="info" id="eliteInfo">4K Quality + DOLBY ATMOS</div>
+
+<div class="info1" id="plusInfo">HD Quality + 1 User</div>
+
+<div class="info2" id="info2">KREX</div>
+
+<div class="info3" id="info3">Ready to binge smarter?</div>
+
+<div class="info4" id="info4">Discover trending movies, epic series, and non-stop entertainment</div>
+
+<div class="info5" id="info5">Your favorite subscriptions all in one place</div>
+
+<div class="info6" id="info6">Customers can subscribe to get access to a variety of premium and specialty content,<br> easily accessible within the Prime Video app</div>
+
+
+
+
+
+
+{% endblock %}

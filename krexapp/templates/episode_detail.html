@@ -1,0 +1,332 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+body {
+    padding-top: 0 !important;
+    background: black;
+    color: white;
+}
+
+/* ================= HERO SECTION ================= */
+
+.movie-hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background: black;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.9) 0%,
+        rgba(0,0,0,0.4) 40%,
+        rgba(0,0,0,0.1) 70%
+    );
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.hero-content {
+    position: absolute;
+    bottom: 22%;
+    left: 5%;
+    z-index: 2;
+    max-width: 650px;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 5px;
+}
+
+.hero-content .episode-code {
+    font-size: 18px;
+    font-weight: bold;
+    opacity: 0.9;
+    margin-bottom: 10px;
+}
+
+/* ================= BUTTONS ================= */
+
+.primary-btn {
+    padding: 12px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    background: rgba(57,56,56,0.6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 8%;
+    left: 5%;
+    height: 55px;
+    z-index: 2;
+    transition: 0.3s ease;
+}
+
+.primary-btn:hover {
+    background: rgba(255,255,255,0.4);
+    transform: scale(1.05);
+}
+
+.icon-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    background: rgba(57,56,56,0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    bottom: 7.8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: 0.3s ease;
+}
+
+.icon-btn:hover {
+    background: rgba(255,255,255,0.4);
+    transform: scale(1.05);
+}
+
+.btn-watchlist { left: 20%; }
+.btn-like { left: 24%; }
+.btn-dislike { left: 28%; }
+.btn-episodes { left: 32%; }
+
+.btn-episodes.active {
+    background: white;
+    color: black;
+}
+
+/* ================= EPISODE LIST ================= */
+
+.episodes-section {
+    margin-top: 60px;
+    padding: 0 25px;
+}
+
+.episode-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    background: #111;
+    padding: 15px;
+    border-radius: 10px;
+    transition: 0.3s ease;
+    align-items: center;
+}
+
+.episode-item:hover {
+    background: #1c1c1c;
+    transform: scale(1.02);
+}
+
+.active-episode {
+    border: 2px solid red;
+    box-shadow: 0 0 20px rgba(255,0,0,0.6);
+    background: #1c1c1c;
+}
+
+.episode-thumb {
+    width: 200px;
+    border-radius: 10px;
+}
+
+.episode-info {
+    flex: 1;
+}
+
+.watch-episode-btn {
+    padding: 8px 20px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ================= RELATED ================= */
+
+.related-section {
+    margin-top: 60px;
+    padding: 0 25px;
+}
+
+     footer {
+    background: rgba(9, 157, 190, 0.25);
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding: 40px 0;
+    margin: 0;
+    position: absolute;
+    top:250.6%;
+}
+
+        nav a.home {color: black;}
+
+        /* Reset everything */
+
+
+footer a {
+    color: #00aaff;       /* Blue color */
+    text-decoration: none;  /* Removes underline */
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+footer a:hover {
+    color: #66d9ff;       /* Lighter blue on hover */
+    text-decoration: none;
+}
+
+</style>
+
+
+<!-- ================= HERO ================= -->
+
+<div class="movie-hero">
+
+{% if episode.thumbnail %}
+    <img src="{{ episode.thumbnail.url }}" class="hero-image">
+{% endif %}
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+    <h1>{{ episode.title }}</h1>
+
+    <div class="episode-code">
+        S{{ episode.season|stringformat:"02d" }}E{{ episode.episode_number|stringformat:"02d" }}
+    </div>
+
+    <p>{{ episode.description }}</p>
+</div>
+
+<!-- WATCH BUTTON NOW GOES TO CINEMATIC PLAYER -->
+<a href="{% url 'watch_episode' episode.id %}">
+    <button class="primary-btn">Watch Episode</button>
+</a>
+
+<a href="{% url 'toggle_tvshow_watchlist' show.id %}">
+    <button class="icon-btn btn-watchlist">
+        {% if in_watchlist %} ✓ {% else %} + {% endif %}
+    </button>
+</a>
+
+<button class="icon-btn btn-like" id="likeBtn">
+    <i class="fa-regular fa-thumbs-up"></i>
+</button>
+
+<button class="icon-btn btn-dislike" id="dislikeBtn">
+    <i class="fa-regular fa-thumbs-down"></i>
+</button>
+
+<button class="icon-btn btn-episodes active" id="episodesBtn">
+    <i class="fa-solid fa-list"></i>
+</button>
+
+</div>
+
+
+<!-- ================= EPISODES SECTION ================= -->
+
+<div class="episodes-section" id="episodesSection">
+
+<h2>Episodes</h2>
+
+{% regroup show.episodes.all by season as season_list %}
+
+{% for season in season_list %}
+<h3 style="margin-top:30px;">Season {{ season.grouper }}</h3>
+
+{% for ep in season.list %}
+<div class="episode-item {% if ep.id == episode.id %}active-episode{% endif %}">
+
+    {% if ep.thumbnail %}
+        <img src="{{ ep.thumbnail.url }}" class="episode-thumb">
+    {% endif %}
+
+    <div class="episode-info">
+        <h4>
+            S{{ ep.season|stringformat:"02d" }}E{{ ep.episode_number|stringformat:"02d" }} - {{ ep.title }}
+        </h4>
+
+        <p>{{ ep.description }}</p>
+
+        <a href="{% url 'episode_detail' ep.id %}">
+            <button class="watch-episode-btn">
+                {% if ep.id == episode.id %}
+                    Viewing
+                {% else %}
+                    View Episode
+                {% endif %}
+            </button>
+        </a>
+    </div>
+
+</div>
+{% endfor %}
+{% endfor %}
+
+</div>
+
+
+<!-- ================= RELATED ================= -->
+
+<div id="relatedSection" class="related-section">
+
+    <h2 style="margin-top:60px;">Customers also watched</h2>
+
+    <div class="movie-row">
+        {% for related in related_shows %}
+            <div class="movie-card">
+                <a href="{% url 'shows_detail' related.id %}">
+                    <img src="{{ related.poster.url }}" alt="{{ related.title }}">
+                </a>
+                <h3>{{ related.title }}</h3>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+<script>
+const episodesBtn = document.getElementById("episodesBtn");
+const episodesSection = document.getElementById("episodesSection");
+const relatedSection = document.getElementById("relatedSection");
+
+episodesBtn.addEventListener("click", function () {
+    const isVisible = window.getComputedStyle(episodesSection).display !== "none";
+
+    if (isVisible) {
+        episodesSection.style.display = "none";
+        relatedSection.style.display = "block";
+        episodesBtn.classList.remove("active");
+    } else {
+        episodesSection.style.display = "block";
+        relatedSection.style.display = "none";
+        episodesBtn.classList.add("active");
+    }
+});
+</script>
+
+{% endblock %}

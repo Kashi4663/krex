@@ -1,0 +1,27 @@
+{% extends "admin_panel/base_admin.html" %}
+
+{% block content %}
+
+<h1>Movies</h1>
+
+<a href="{% url 'add_movie' %}" class="btn">+ Add Movie</a>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Language</th>
+        <th>Trending</th>
+    </tr>
+
+    {% for movie in movies %}
+    <tr>
+        <td>{{ movie.title }}</td>
+        <td>{{ movie.release_year }}</td>
+        <td>{{ movie.language }}</td>
+        <td>{{ movie.is_trending }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

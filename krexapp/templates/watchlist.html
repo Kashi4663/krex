@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="margin-top:100px; margin-left:25px;">My Watchlist</h2>
+
+<div class="movie-row">
+    {% for item in watchlist_movies %}
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' item.movie.id %}">
+                <img src="{{ item.movie.poster.url }}" alt="{{ item.movie.title }}">
+            </a>
+            <h3>{{ item.movie.title }}</h3>
+        </div>
+    {% empty %}
+        <p style="margin-left:25px;">Your watchlist is empty.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

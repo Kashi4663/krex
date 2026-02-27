@@ -1,0 +1,19 @@
+{% extends "admin_panel/base_admin.html" %}
+
+{% block content %}
+
+<h1>Dashboard</h1>
+
+<div class="card">
+    <h3>Total Movies: {{ total_movies }}</h3>
+</div>
+
+<div class="card">
+    <h3>Total TV Shows: {{ total_shows }}</h3>
+</div>
+
+<div class="card">
+    <h3>Total Episodes: {{ total_episodes }}</h3>
+</div>
+
+{% endblock %}

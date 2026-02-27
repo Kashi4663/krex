@@ -1,0 +1,1439 @@
+{% load static %} 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My Website{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="icon" href="{% static 'images/krex1.PNG' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+      html,body {
+    margin: 0;
+    font-family: Arial;
+    background-color: black;
+    color: white;   /* makes text visible on black */
+     overflow-x: hidden;
+}
+
+body {
+    padding-top: 80px;
+}
+
+
+
+
+
+
+    header {
+    background: rgba(41, 41, 41, 0);
+    padding: 15px 30px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: 
+        width 0.4s ease;
+        top 0.4s ease;
+        border-radius 0.4s ease;
+        background 0.4s ease;
+        box-shadow 0.4s ease
+        opacity 0.4s ease;
+}
+
+/* When Scrolled */
+header.scrolled {
+    width: 85%;
+    left: 50%;
+    transform: translateX(-50%);
+    backdrop-filter: blur(6px);
+    top: -10px;
+    border-radius: 10px;
+    background: rgba(9, 36, 190, 0.28);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+        /* 🔥 Hover Box Effect */
+nav a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+nav a:hover {
+    background: rgba(13, 110, 228, 0.33);
+    backdrop-filter: blur(100px);
+    box-shadow: 0 0 15px  rgba(248, 248, 248, 0.55);
+    transform: scale(1.05);}
+
+/* Active (clicked) link */
+nav a.active {
+    background: rgba(13, 110, 228, 0.33);
+    backdrop-filter: blur(100px);
+    box-shadow: 0 0 15px rgba(212, 0, 0, 0.4);
+    transform: scale(1.05);
+}
+
+     
+
+
+       footer {
+    background: rgba(9, 157, 190, 0.25);
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding: 40px 0;
+    margin: 0;
+    position: absolute;
+    top:200.6%;
+}
+
+        nav a.home {color: black;}
+
+        /* Reset everything */
+
+
+footer a {
+    color: #00aaff;       /* Blue color */
+    text-decoration: none;  /* Removes underline */
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+footer a:hover {
+    color: #66d9ff;       /* Lighter blue on hover */
+    text-decoration: none;
+}
+
+
+
+
+
+/*template 1 */
+.video-bg {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 80px); /* subtract header height */
+    overflow: hidden;
+}
+
+
+
+
+
+.video-bg video {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+/* template 2 */
+.bricks {
+    margin: 0;
+    text-align: center;
+    padding: 0;
+}
+
+
+.bricks img {
+    width: 100%;
+    display: block;
+}
+
+
+.info2{position: absolute;
+    top: 15%;
+    left: 5%;
+    color: white;
+    font-size: 100px;
+    font-weight: bold;
+}
+
+.info3{position: absolute;
+    top: 26%;
+    left: 5.2%;
+    color: white;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.info4{position: absolute;
+    top: 31%;
+    left: 5.2%;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.info5{position: absolute;
+    top: 140%;
+    left: 28%;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.info6{position: absolute;
+    top: 146%;
+    left: 28%;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+
+/* join Krex Elite at ₹499/year button */
+.custom-btn {
+    padding: 12px 30px;
+    font-size: 25px;
+    font-weight: bold;
+    background: rgba(0, 115, 255, 0.45);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    position: absolute;
+    top: 48%;
+    left: 5%;
+    width: 400px;
+    height: 60px;
+}
+
+
+.custom-btn:hover {
+    background: rgb(0, 157, 255);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
+}
+
+/* 4K Quality + DOLBY ATMOS */
+.info{position: absolute;
+    top: 55%;
+    left: 10%;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* join Krex Plus at ₹299/year button */
+.custom-btn1 {
+    padding: 12px 30px;
+    font-size: 25px;
+    font-weight: bold;
+    background: rgba(0, 115, 255, 0.45);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    position: absolute;
+    top: 58%;
+    left: 5%;
+    width: 400px;
+    height: 60px;
+}
+
+
+.custom-btn1:hover {
+    background: rgb(0, 157, 255);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
+}
+
+/* HD Quality + 1 User */
+.info1{position: absolute;
+    top: 65%;
+    left: 11%;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* join Krex at ₹99/year button */
+.custom-btn2 {
+    padding: 12px 30px;
+    font-size: 25px;
+    font-weight: bold;
+    background: rgba(0, 115, 255, 0.45);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    position: absolute;
+    top: 68%;
+    left: 5%;
+    width: 400px;
+    height: 60px;
+}
+
+
+.custom-btn2:hover {
+    background: rgb(0, 157, 255);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
+}
+
+/* Compare All Plans */
+.custom-btn3 {
+    padding: 12px 30px;
+    font-size: 25px;
+    font-weight: bold;
+    background: rgba(0, 115, 255, 0.45);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    position: absolute;
+    top: 75%;
+    left: 5%;
+    width: 400px;
+    height: 60px;
+}
+
+
+.custom-btn3:hover {
+    background: rgb(0, 157, 255);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
+}
+
+.custom-btn4 {
+    padding: 12px 30px;
+    font-size: 25px;
+    font-weight: bold;
+    background: rgba(0, 115, 255, 0.72);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    position: absolute;
+    top: 153%;
+    left: 39%;
+    width: 400px;
+    height: 60px;
+}
+
+
+.custom-btn4:hover {
+    background: rgb(0, 157, 255);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
+}
+
+
+/* 🌍 Language Dropdown */
+.language-container {
+    position: relative;
+    left: -240%;
+}
+
+.language-btn {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-weight: bold;
+}
+
+.language-dropdown {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 400px;
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    background: rgba(20,20,20,0.95);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+
+.language-dropdown span {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.language-dropdown span:hover {
+    color: #00aaff;
+}
+
+.movie-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 50px;
+}
+
+.movie-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 30px;
+}
+
+.movie-card {
+    width: 200px;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.movie-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+/* movie_detail*/
+.movie-hero {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.8) 30%, rgba(0, 0, 0, 0.2));
+    z-index: 2;
+}
+
+.hero-content {
+    position: absolute;
+    z-index: 3;
+    top: 70%;
+    left: 5%;
+    max-width: 600px;
+    transform: translateY(-50%);
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* 🔥 PRIME STYLE HERO CAROUSEL */
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+    margin-top: 80px;
+}
+
+.slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Dark cinematic overlay */
+.slide::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0.2));
+    top: 0;
+    left: 0;
+}
+
+/* Text Content */
+.slide-content {
+    position: absolute;
+    top: 60%;
+    left: 6%;
+    transform: translateY(-50%);
+    color: white;
+    max-width: 600px;
+    z-index: 2;
+}
+
+.slide-content h1 {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.slide-content p {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+/* Button */
+.carousel-btn {
+    padding: 12px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background: white;
+    color: black;
+    transform: scale(1.05);
+}
+
+/* Arrows */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    background: rgba(0,0,0,0.4);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 3;
+    border-radius: 10px;
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }
+
+.prev:hover, .next:hover {
+    background: rgba(255,255,255,0.5);
+    color: black;
+}
+
+
+
+.search-results {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 300px;
+    background: rgba(20,20,20,0.95);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    display: none;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 9999;
+}
+
+.search-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.search-item:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.search-item img {
+    width: 40px;
+    height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+
+
+
+/* ===== PRIME STYLE NAV ===== */
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo {
+    color: white;
+    margin-right: 20px;
+}
+
+/* ================= GLOBAL ================= */
+
+html, body {
+    margin: 0;
+    font-family: Arial;
+    background-color: black;
+    color: white;
+    overflow-x: hidden;
+}
+
+body {
+    padding-top: 80px;
+}
+
+
+/* ================= HEADER ================= */
+
+header {
+    background: rgba(41, 41, 41, 0);
+    padding: 15px 30px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.4s ease;
+}
+
+/* Scrolled Effect */
+header.scrolled {
+    width: 85%;
+    left: 50%;
+    transform: translateX(-50%);
+    backdrop-filter: blur(6px);
+    top: -10px;
+    border-radius: 10px;
+    background: rgba(9, 36, 190, 0.28);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+
+/* ================= NAV LAYOUT ================= */
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    position: relative;
+}
+
+.logo {
+    color: white;
+    margin-right: 20px;
+}
+
+
+/* ================= NAV LINKS ================= */
+
+nav a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background: rgba(13, 110, 228, 0.33);
+    backdrop-filter: blur(100px);
+    box-shadow: 0 0 15px rgba(248, 248, 248, 0.55);
+    transform: scale(1.05);
+}
+
+nav a.active {
+    background: rgba(13, 110, 228, 0.33);
+    box-shadow: 0 0 15px rgba(212, 0, 0, 0.4);
+    transform: scale(1.05);
+}
+
+
+/* ================= SEARCH (NO LAYOUT SHIFT) ================= */
+
+.search-container {
+    position: relative;
+    width: 40px;               /* Fixed width so layout never shifts */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.search-icon {
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+    position:absolute;
+    left: -300px;
+}
+
+/* Hidden Input */
+.search-input {
+    position: absolute;
+    right: 0;
+    width: 0;
+    opacity: 0;
+    padding: 8px 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    transition: all 0.3s ease;
+    position:absolute;
+    left: -280px;
+}
+
+/* Expand on Hover */
+.search-container:hover .search-input {
+    width: 220px;
+    opacity: 1;
+    padding: 8px 12px;
+}
+
+/* Search Dropdown */
+.search-results {
+    position: absolute;
+    top: 45px;
+    left: -300px;
+    /* 👇 align to the FULL navbar edge */
+    right: 0;
+
+    width: 300px;
+    max-width: 90vw;          /* prevents going outside screen */
+
+    background: rgba(20,20,20,0.95);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+
+    display: none;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 9999;
+}
+
+
+/* ================= LANGUAGE ================= */
+
+.language-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+}
+
+/* Button */
+.language-btn {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-weight: bold;
+    transition: 0.3s ease;
+    position:absolute;
+    left: -300px;
+}
+
+.language-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Dropdown */
+.language-dropdown {
+    position: absolute;
+    top: 25px;
+    left: -680px;
+    right: 0;               /* Always aligned right */
+    width: 400px;
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    background: rgba(20,20,20,0.95);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    z-index: 9999;
+}
+
+.language-dropdown span {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.language-dropdown span:hover {
+    color: #00aaff;
+}
+
+/* Hide default cursor */
+body {
+    cursor: none;
+}
+
+/* Disable system cursor */
+* {
+    cursor: none !important;
+}
+
+/* Custom Circle */
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 99999;
+}
+
+/* Small version on hover */
+.custom-cursor.small {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border: none;
+}
+
+.admin-btn {
+    background: linear-gradient(45deg, #ff0000, #b30000);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.admin-btn:hover {
+    background: white;
+    color: black;
+    transform: scale(1.05);
+}
+
+    </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+<header>
+   <nav style="float:left; display:flex; align-items:center; gap:25px; width:100%; justify-content:space-between;">
+
+<div style="display:flex; align-items:center; gap:25px;">
+    <h3 style="color:white; margin-right:30px;">KREX</h3>
+
+    <a href="{% url 'index' %}" id="navHome">Home</a>
+<a href="{% url 'movies' %}" id="navMovies">Movies</a>
+<a href="{% url 'tv_shows' %}" id="navTV">TV Shows</a>
+<a href="{% url 'watchlist' %}" class="nav-link">My Watchlist</a>
+
+{% if request.user.is_authenticated and request.user.is_superuser %}
+    <a href="{% url 'admin_dashboard' %}" class="admin-btn">
+        Admin Panel
+    </a>
+{% endif %}
+</div>
+
+<div style="display:flex; align-items:center; gap:10px;">
+    <!-- 🔍 Search Icon -->
+    <div class="nav-right">
+
+        <!-- 🔍 Search -->
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search movies...">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+
+        <!-- 🌍 Language -->
+        <div class="language-container">
+            <button class="language-btn" id="langBtn">EN ▾</button>
+
+
+    <div class="language-dropdown">
+        <span data-lang="EN">English</span>
+        <span data-lang="HI">Hindi</span>
+        <span data-lang="GU">Gujarati</span>
+        <span data-lang="JP">Japanese</span>
+        <span data-lang="ES">Spanish</span>
+        <span data-lang="FR">French</span>
+        <span data-lang="DE">German</span>
+        <span data-lang="IT">Italian</span>
+        <span data-lang="KR">Korean</span>
+        <span data-lang="AR">Arabic</span>
+        <span data-lang="PT">Portuguese</span>
+        <span data-lang="RU">Russian</span>
+    </div>
+</div>
+
+    </div>
+
+</div>
+
+</nav>
+
+</header>
+
+<section>
+    {% block content %}
+    {% endblock %}
+</section>
+
+
+<footer>
+    <h1>KREX</h1> 
+    <br>
+    
+    <a href = "{% url 'about' %}">
+        Terms and Privacy Notice 
+    </a>
+|
+    <a href = "{% url 'about' %}">
+        Send us feedback
+    </a>
+|
+    <a href = "{% url 'about' %}">
+        Help
+    </a>
+    <br><br>© 2026, Krex.com, Project Of Keval Mehta
+</footer>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+// ===================== SCROLLED NAVBAR (UNCHANGED BEHAVIOR) =====================
+window.addEventListener("scroll", function () {
+    const header = document.querySelector("header");
+
+    if (window.scrollY > 50) {
+        header.classList.add("scrolled");
+    } else {
+        header.classList.remove("scrolled");
+    }
+});
+
+
+// ===================== LANGUAGE SYSTEM =====================
+
+const langBtn = document.getElementById("langBtn");
+const dropdown = document.querySelector(".language-dropdown");
+const languages = document.querySelectorAll(".language-dropdown span");
+
+// Navbar
+const navHome = document.getElementById("navHome");
+const navMovies = document.getElementById("navMovies");
+const navTV = document.getElementById("navTV");
+
+// Buttons
+const eliteBtn = document.getElementById("eliteBtn");
+const plusBtn = document.getElementById("plusBtn");
+const basicBtn = document.getElementById("basicBtn");
+const compareBtn = document.getElementById("compareBtn");
+const joinBtn = document.getElementById("joinBtn");
+
+// Info
+const eliteInfo = document.getElementById("eliteInfo");
+const plusInfo = document.getElementById("plusInfo");
+
+// Hero
+const info2 = document.getElementById("info2");
+const info3 = document.getElementById("info3");
+const info4 = document.getElementById("info4");
+const info5 = document.getElementById("info5");
+const info6 = document.getElementById("info6");
+
+
+// ===================== TRANSLATIONS =====================
+
+const translations = {
+
+EN:{
+home:"Home",
+movies:"Movies",
+tv:"TV Shows",
+elite:"Join Krex Elite at ₹499/year",
+eliteInfo:"4K Quality + DOLBY ATMOS",
+plus:"Join Krex Plus at ₹299/year",
+plusInfo:"HD Quality + 1 User",
+basic:"Join Krex at ₹99/year",
+compare:"Compare All Plans",
+join:"Join KREX",
+heroTitle:"KREX",
+heroSubtitle:"Ready to binge smarter?",
+heroDesc:"Discover trending movies, epic series, and non-stop entertainment",
+subTitle2:"Your favorite subscriptions all in one place",
+subDesc2:"Customers can subscribe to get access to premium and specialty content easily"
+},
+
+HI:{
+home:"होम",
+movies:"फ़िल्में",
+tv:"टीवी शो",
+elite:"₹499/वर्ष Krex Elite जॉइन करें",
+eliteInfo:"4K गुणवत्ता + डॉल्बी एटमॉस",
+plus:"₹299/वर्ष Krex Plus जॉइन करें",
+plusInfo:"HD गुणवत्ता + 1 उपयोगकर्ता",
+basic:"₹99/वर्ष में Krex जॉइन करें",
+compare:"सभी प्लान तुलना करें",
+join:"KREX जॉइन करें",
+heroTitle:"KREX",
+heroSubtitle:"स्मार्ट तरीके से बिंज करने के लिए तैयार?",
+heroDesc:"ट्रेंडिंग फ़िल्में और शानदार सीरीज़ खोजें",
+subTitle2:"आपकी पसंदीदा सदस्यताएँ एक ही जगह",
+subDesc2:"प्रीमियम सामग्री तक आसान पहुँच"
+},
+
+GU:{
+home:"હોમ",
+movies:"ફિલ્મો",
+tv:"ટીવી શો",
+elite:"₹499/વર્ષે Krex Elite જોડાઓ",
+eliteInfo:"4K ગુણવત્તા + ડોલ્બી એટમોસ",
+plus:"₹299/વર્ષે Krex Plus જોડાઓ",
+plusInfo:"HD ગુણવત્તા + 1 યુઝર",
+basic:"₹99/વર્ષે Krex જોડાઓ",
+compare:"બધા પ્લાન સરખાવો",
+join:"KREX જોડાઓ",
+heroTitle:"KREX",
+heroSubtitle:"સ્માર્ટ રીતે બિંજ કરવા તૈયાર?",
+heroDesc:"ટ્રેન્ડિંગ ફિલ્મો અને સિરીઝ શોધો",
+subTitle2:"તમારી મનપસંદ સબ્સ્ક્રિપ્શન એક જ જગ્યાએ",
+subDesc2:"પ્રીમિયમ સામગ્રી માટે સરળ ઍક્સેસ"
+},
+
+JP:{
+home:"ホーム",
+movies:"映画",
+tv:"テレビ番組",
+elite:"₹499/年でKrex Eliteに参加",
+eliteInfo:"4K画質 + ドルビーアトモス",
+plus:"₹299/年でKrex Plusに参加",
+plusInfo:"HD画質 + 1ユーザー",
+basic:"₹99/年でKrexに参加",
+compare:"すべてのプランを比較",
+join:"KREXに参加",
+heroTitle:"KREX",
+heroSubtitle:"もっと賢く一気見する準備はできていますか？",
+heroDesc:"人気の映画やシリーズを発見",
+subTitle2:"お気に入りのサブスクリプションを一か所に",
+subDesc2:"プレミアムコンテンツへ簡単アクセス"
+},
+
+ES:{
+home:"Inicio",
+movies:"Películas",
+tv:"Series",
+elite:"Únete a Krex Elite ₹499/año",
+eliteInfo:"Calidad 4K + Dolby Atmos",
+plus:"Únete a Krex Plus ₹299/año",
+plusInfo:"Calidad HD + 1 Usuario",
+basic:"Únete a Krex ₹99/año",
+compare:"Comparar todos los planes",
+join:"Unirse a KREX",
+heroTitle:"KREX",
+heroSubtitle:"¿Listo para maratonear mejor?",
+heroDesc:"Descubre películas y series populares",
+subTitle2:"Tus suscripciones en un solo lugar",
+subDesc2:"Acceso fácil a contenido premium"
+},
+
+FR:{
+home:"Accueil",
+movies:"Films",
+tv:"Séries",
+elite:"Rejoignez Krex Elite ₹499/an",
+eliteInfo:"Qualité 4K + Dolby Atmos",
+plus:"Rejoignez Krex Plus ₹299/an",
+plusInfo:"Qualité HD + 1 utilisateur",
+basic:"Rejoignez Krex ₹99/an",
+compare:"Comparer tous les plans",
+join:"Rejoindre KREX",
+heroTitle:"KREX",
+heroSubtitle:"Prêt à binge-watcher intelligemment ?",
+heroDesc:"Découvrez films et séries tendance",
+subTitle2:"Vos abonnements au même endroit",
+subDesc2:"Accès simple au contenu premium"
+},
+
+DE:{
+home:"Startseite",
+movies:"Filme",
+tv:"Serien",
+elite:"Krex Elite ₹499/Jahr",
+eliteInfo:"4K Qualität + Dolby Atmos",
+plus:"Krex Plus ₹299/Jahr",
+plusInfo:"HD Qualität + 1 Benutzer",
+basic:"Krex ₹99/Jahr",
+compare:"Alle Pläne vergleichen",
+join:"KREX beitreten",
+heroTitle:"KREX",
+heroSubtitle:"Bereit smarter zu binge-watchen?",
+heroDesc:"Entdecke trendige Filme und Serien",
+subTitle2:"Alle Abos an einem Ort",
+subDesc2:"Einfacher Zugang zu Premium-Inhalten"
+},
+
+IT:{
+home:"Home",
+movies:"Film",
+tv:"Serie TV",
+elite:"Krex Elite ₹499/anno",
+eliteInfo:"Qualità 4K + Dolby Atmos",
+plus:"Krex Plus ₹299/anno",
+plusInfo:"Qualità HD + 1 Utente",
+basic:"Krex ₹99/anno",
+compare:"Confronta tutti i piani",
+join:"Unisciti a KREX",
+heroTitle:"KREX",
+heroSubtitle:"Pronto per binge migliore?",
+heroDesc:"Scopri film e serie popolari",
+subTitle2:"Tutti gli abbonamenti in un posto",
+subDesc2:"Accesso facile ai contenuti premium"
+},
+
+KR:{
+home:"홈",
+movies:"영화",
+tv:"TV 쇼",
+elite:"₹499/년 Krex Elite 가입",
+eliteInfo:"4K 화질 + 돌비 애트모스",
+plus:"₹299/년 Krex Plus 가입",
+plusInfo:"HD 화질 + 1 사용자",
+basic:"₹99/년 Krex 가입",
+compare:"모든 요금제 비교",
+join:"KREX 가입",
+heroTitle:"KREX",
+heroSubtitle:"더 스마트하게 정주행할 준비됐나요?",
+heroDesc:"인기 영화와 시리즈 발견",
+subTitle2:"모든 구독을 한 곳에",
+subDesc2:"프리미엄 콘텐츠에 쉽게 접근"
+},
+
+AR:{
+home:"الرئيسية",
+movies:"أفلام",
+tv:"مسلسلات",
+elite:"₹499/سنة Krex Elite",
+eliteInfo:"جودة 4K + دولبي أتموس",
+plus:"₹299/سنة Krex Plus",
+plusInfo:"جودة HD + مستخدم واحد",
+basic:"₹99/سنة Krex",
+compare:"قارن جميع الخطط",
+join:"انضم إلى KREX",
+heroTitle:"KREX",
+heroSubtitle:"هل أنت مستعد للمشاهدة بذكاء؟",
+heroDesc:"اكتشف أحدث الأفلام والمسلسلات",
+subTitle2:"كل اشتراكاتك في مكان واحد",
+subDesc2:"وصول سهل إلى المحتوى المميز"
+},
+
+PT:{
+home:"Início",
+movies:"Filmes",
+tv:"Séries",
+elite:"Krex Elite ₹499/ano",
+eliteInfo:"Qualidade 4K + Dolby Atmos",
+plus:"Krex Plus ₹299/ano",
+plusInfo:"Qualidade HD + 1 Usuário",
+basic:"Krex ₹99/ano",
+compare:"Comparar planos",
+join:"Entrar no KREX",
+heroTitle:"KREX",
+heroSubtitle:"Pronto para maratonar melhor?",
+heroDesc:"Descubra filmes e séries populares",
+subTitle2:"Todas assinaturas em um lugar",
+subDesc2:"Acesso fácil ao conteúdo premium"
+},
+
+RU:{
+home:"Главная",
+movies:"Фильмы",
+tv:"Сериалы",
+elite:"Krex Elite ₹499/год",
+eliteInfo:"Качество 4K + Dolby Atmos",
+plus:"Krex Plus ₹299/год",
+plusInfo:"HD качество + 1 пользователь",
+basic:"Krex ₹99/год",
+compare:"Сравнить планы",
+join:"Присоединиться к KREX",
+heroTitle:"KREX",
+heroSubtitle:"Готовы смотреть умнее?",
+heroDesc:"Откройте популярные фильмы и сериалы",
+subTitle2:"Все подписки в одном месте",
+subDesc2:"Легкий доступ к премиум-контенту"
+}
+
+};
+
+
+// ===================== APPLY LANGUAGE =====================
+function applyLanguage(selected){
+
+if(!translations[selected]) return;
+const t=translations[selected];
+
+if(navHome) navHome.textContent=t.home;
+if(navMovies) navMovies.textContent=t.movies;
+if(navTV) navTV.textContent=t.tv;
+
+if(eliteBtn) eliteBtn.textContent=t.elite;
+if(eliteInfo) eliteInfo.textContent=t.eliteInfo;
+
+if(plusBtn) plusBtn.textContent=t.plus;
+if(plusInfo) plusInfo.textContent=t.plusInfo;
+
+if(basicBtn) basicBtn.textContent=t.basic;
+if(compareBtn) compareBtn.textContent=t.compare;
+if(joinBtn) joinBtn.textContent=t.join;
+
+if(info2) info2.textContent=t.heroTitle;
+if(info3) info3.textContent=t.heroSubtitle;
+if(info4) info4.textContent=t.heroDesc;
+if(info5) info5.textContent=t.subTitle2;
+if(info6) info6.textContent=t.subDesc2;
+
+langBtn.textContent=selected+" ▾";
+localStorage.setItem("selectedLanguage",selected);
+}
+
+
+// ===================== LOAD SAVED LANGUAGE =====================
+const savedLang=localStorage.getItem("selectedLanguage");
+if(savedLang){applyLanguage(savedLang);}
+
+
+// ===================== EVENTS =====================
+languages.forEach(lang=>{
+lang.addEventListener("click",function(){
+const selected=this.getAttribute("data-lang");
+applyLanguage(selected);
+dropdown.style.display="none";
+});
+});
+
+langBtn.addEventListener("click",()=>{
+dropdown.style.display=
+dropdown.style.display==="grid"?"none":"grid";
+});
+
+document.addEventListener("click",(e)=>{
+if(!e.target.closest(".language-container")){
+dropdown.style.display="none";
+}
+});
+
+});
+
+
+document.addEventListener("DOMContentLoaded", function(){
+
+// ===================== SCROLLED NAVBAR =====================
+window.addEventListener("scroll", function () {
+    const header = document.querySelector("header");
+    if (window.scrollY > 50) {
+        header.classList.add("scrolled");
+    } else {
+        header.classList.remove("scrolled");
+    }
+});
+
+// ===================== CAROUSEL =====================
+
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+const totalSlides = slides.length;
+
+function showSlide(index){
+    slides.forEach(slide => slide.classList.remove("active"));
+    slides[index].classList.add("active");
+}
+
+function nextSlide(){
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+}
+
+function prevSlide(){
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+}
+
+document.querySelector(".next")?.addEventListener("click", nextSlide);
+document.querySelector(".prev")?.addEventListener("click", prevSlide);
+
+// 🔥 SHOW FIRST SLIDE IMMEDIATELY
+if(totalSlides > 0){
+    showSlide(0);
+}
+
+// Auto slide
+setInterval(nextSlide, 4000);
+
+});
+
+
+</script>
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
+
+searchInput.addEventListener("keyup", function() {
+
+    const query = this.value;
+    if (!query) {
+    searchResults.style.display = "none";
+    return;
+}
+    if (query.length < 2) {
+        searchResults.style.display = "none";
+        return;
+    }
+
+    fetch(`/live-search/?q=${query}`)
+        .then(response => response.json())
+        .then(data => {
+
+            searchResults.innerHTML = "";
+
+            if (data.length === 0) {
+                searchResults.innerHTML = "<p style='padding:10px;'>No movies found</p>";
+                searchResults.style.display = "block";
+                return;
+            }
+
+            data.forEach(movie => {
+
+                searchResults.innerHTML += `
+                    <div class="search-item" onclick="window.location.href='/movie/${movie.id}/'">
+                        <img src="${movie.poster}">
+                        <span>${movie.title}</span>
+                    </div>
+                `;
+            });
+
+            searchResults.style.display = "block";
+        });
+
+});
+
+// Close dropdown when clicking outside
+document.addEventListener("click", function(e){
+    if (!e.target.closest(".search-container")){
+        searchResults.style.display = "none";
+    }
+});
+</script>
+
+
+
+
+<div class="custom-cursor"></div>
+<script>
+
+    const cursor = document.querySelector(".custom-cursor");
+
+document.addEventListener("mousemove", e => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+});
+
+// Elements where cursor becomes small
+const hoverElements = document.querySelectorAll("a, button, .search-item, .language-btn");
+
+hoverElements.forEach(el => {
+    el.addEventListener("mouseenter", () => {
+        cursor.classList.add("small");
+    });
+
+    el.addEventListener("mouseleave", () => {
+        cursor.classList.remove("small");
+    });
+});
+
+</script>
+
+</body>
+</html>

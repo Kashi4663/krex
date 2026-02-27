@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ movie.title }} - KREX</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .player-wrapper {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            cursor: default;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: black;
+        }
+
+        /* ===== OVERLAY (BOTTOM LEFT) ===== */
+        .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 0 0 360px 120px; /* bottom + left spacing */
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.85) 0%,
+        rgba(0,0,0,0.6) 30%,
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.overlay.active {
+    opacity: 1;
+}
+
+.info-box {
+    max-width: 650px;
+}
+
+/* TEXT STYLING */
+
+.cleo {
+    font-size: 16px;
+    color: #bbb;
+    margin-bottom: 10px;
+}
+
+.cleo1 {
+    font-size: 50px;
+    color: #bbb;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.movie-title {
+    font-size: 72px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.movie-description {
+    font-size: 18px;
+    color: #ddd;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.movie-year {
+    font-size: 16px;
+    color: #aaa;
+}
+
+
+        
+
+        /* ===== BACK BUTTON ===== */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 20;
+            transition: 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        .custom-controls {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    background: rgba(0,0,0,0.6);
+    padding: 12px 25px;
+    border-radius: 40px;
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+.player-wrapper:hover .custom-controls {
+    opacity: 1;
+}
+
+.custom-controls button,
+.custom-controls select {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.custom-controls button:hover {
+    transform: scale(1.2);
+}
+
+    </style>
+</head>
+
+<body>
+
+<div class="player-wrapper" id="playerWrapper">
+
+    {% if movie.video %}
+    <video id="videoPlayer" controls autoplay>
+        <div class="custom-controls" id="controls">
+
+    <button onclick="togglePlay()">⏯</button>
+
+    <button onclick="skip(-10)">⏪ 10s</button>
+
+    <button onclick="skip(10)">10s ⏩</button>
+
+    <select onchange="changeSpeed(this.value)">
+        <option value="0.5">0.5x</option>
+        <option value="1" selected>1x</option>
+        <option value="1.5">1.5x</option>
+        <option value="2">2x</option>
+    </select>
+
+    <button onclick="toggleFullscreen()">⛶</button>
+
+</div>
+        <source src="{{ movie.video.url }}" type="video/mp4">
+    </video>
+    {% else %}
+        <h2 style="color:white; text-align:center; padding-top:200px;">
+            No video available
+        </h2>
+    {% endif %}
+
+    <!-- ===== MOVIE INFO OVERLAY ===== -->
+    <div class="overlay" id="overlay">
+        <div class="info-box">
+            <div class="cleo1">KREX</div>
+            <br><br><br><br>     
+            <div class="cleo">You're Watching</div>
+            <div class="movie-title">{{ movie.title }}</div>
+            <div class="movie-year">{{ movie.release_year }}</div>
+            <div class="movie-description">
+                {{ movie.description }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-btn" onclick="history.back()">← Back</button>
+
+</div>
+
+<script>
+const video = document.getElementById("videoPlayer");
+const overlay = document.getElementById("overlay");
+
+function togglePlay() {
+    if (video.paused) {
+        video.play();
+    } else {
+        video.pause();
+    }
+}
+
+function skip(seconds) {
+    video.currentTime += seconds;
+}
+
+function changeSpeed(speed) {
+    video.playbackRate = speed;
+}
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        video.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+}
+
+// Pause overlay logic
+video.addEventListener("pause", () => {
+    overlay.classList.add("active");
+});
+
+video.addEventListener("play", () => {
+    overlay.classList.remove("active");
+});
+</script>
+
+</body>
+</html>

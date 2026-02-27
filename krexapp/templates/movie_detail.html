@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+body {
+    padding-top: 0 !important;
+}
+
+.movie-hero {
+    margin-top: 0px;
+    height: 100vh;
+}
+
+.info2{
+    position: absolute;
+    top: 57%;
+    left: 5.2%;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.custom-btn78 {
+    padding: 12px 30px;
+    font-size: 25px;
+    font-weight: bold;
+    background: rgba(57, 56, 56, 0.54);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    position: absolute;
+    top: 85%;
+    left: 4.8%;
+    height: 60px;
+    z-index: 2;
+}
+
+.custom-btn78:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgb(255, 255, 255);
+}
+
+.custom-btn79 {
+    padding: 12px 30px;
+    font-size: 25px;
+    font-weight: bold;
+    background: rgba(57, 56, 56, 0.54);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    position: absolute;
+    top: 85%;
+    left: 16%;
+    height: 60px;
+    z-index: 2;
+}
+
+.custom-btn79:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgb(255, 255, 255);
+}
+
+.custom-btn80,
+.custom-btn81,
+.custom-btn82 {
+    width: 65px;
+    height: 65px;
+    font-size: 25px;
+    font-weight: bold;
+    background: rgba(57, 56, 56, 0.54);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s ease;
+    position: absolute;
+    top: 84.7%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.custom-btn80 { left: 26%; }
+.custom-btn81 { left: 30%; }
+.custom-btn82 { left: 34%; }
+
+.custom-btn80:hover,
+.custom-btn81:hover,
+.custom-btn82:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgb(255, 255, 255);
+}
+
+.movie-row {
+    margin-bottom: 80px;
+}
+</style>
+
+
+<div class="movie-hero">
+
+   {% if movie.trailer %}
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="{{ movie.trailer.url }}" type="video/mp4">
+    </video>
+{% endif %}
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1 data-translate>{{ movie.title }}</h1>
+        <p data-translate>{{ movie.description }}</p>
+        <p><strong>Language:</strong> {{ movie.language }}</p>
+        <p><strong>Year:</strong> {{ movie.release_year }}</p>
+    </div>
+
+</div>
+
+
+<h2 class="section-title" style="margin-top:60px; margin-left:25px">
+    Customers also watched
+</h2>
+
+<div class="movie-row">
+    {% for movie in related_movies %}
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' movie.id %}">
+                <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+            </a>
+            <h3>{{ movie.title }}</h3>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="info2" id="info2">KREX</div>
+
+
+<!-- ✅ WATCH BUTTON (FIXED CLEANLY) -->
+{% if movie.video %}
+<a href="{% url 'watch_movie' movie.id %}">
+    <button class="custom-btn78">Watch Now</button>
+</a>
+{% endif %}
+
+
+<!-- More Info Button (unchanged logic) -->
+{% if movie.more_info_link %}
+<a href="{{ movie.more_info_link }}" target="_blank">
+    <button class="custom-btn79" id="moreInfoBtn">More Info</button>
+</a>
+{% endif %}
+
+
+<a href="{% url 'toggle_watchlist' movie.id %}">
+    <button class="custom-btn80">
+        {% if in_watchlist %}
+            ✓
+        {% else %}
+            +
+        {% endif %}
+    </button>
+</a>
+
+<button class="custom-btn81">
+    <i class="fa-regular fa-thumbs-up"></i>
+</button>
+
+<button class="custom-btn82">
+    <i class="fa-regular fa-thumbs-down"></i>
+</button>
+
+
+<script>
+const likeBtn = document.querySelector('.custom-btn81');
+const dislikeBtn = document.querySelector('.custom-btn82');
+
+const likeIcon = likeBtn.querySelector('i');
+const dislikeIcon = dislikeBtn.querySelector('i');
+
+likeBtn.addEventListener('click', function() {
+
+    if (dislikeIcon.classList.contains('fa-solid')) {
+        dislikeIcon.classList.remove('fa-solid');
+        dislikeIcon.classList.add('fa-regular');
+        dislikeIcon.style.color = "white";
+    }
+
+    if (likeIcon.classList.contains('fa-regular')) {
+        likeIcon.classList.remove('fa-regular');
+        likeIcon.classList.add('fa-solid');
+        likeIcon.style.color = "#fefefe";
+    } else {
+        likeIcon.classList.remove('fa-solid');
+        likeIcon.classList.add('fa-regular');
+        likeIcon.style.color = "white";
+    }
+});
+
+dislikeBtn.addEventListener('click', function() {
+
+    if (likeIcon.classList.contains('fa-solid')) {
+        likeIcon.classList.remove('fa-solid');
+        likeIcon.classList.add('fa-regular');
+        likeIcon.style.color = "white";
+    }
+
+    if (dislikeIcon.classList.contains('fa-regular')) {
+        dislikeIcon.classList.remove('fa-regular');
+        dislikeIcon.classList.add('fa-solid');
+        dislikeIcon.style.color = "#ffffff";
+    } else {
+        dislikeIcon.classList.remove('fa-solid');
+        dislikeIcon.classList.add('fa-regular');
+        dislikeIcon.style.color = "white";
+    }
+});
+</script>
+
+{% endblock %}
